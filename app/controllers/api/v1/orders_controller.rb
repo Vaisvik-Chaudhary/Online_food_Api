@@ -34,7 +34,7 @@ module Api
             @restaurant = Restaurant.find(@order.restaurant_id)
             @order.restaurant_address=@restaurant.restaurant_address
             @order.restaurant_id = Item.find(params[:order][:restaurant_id]).restaurant_id
-        
+            @order.delivery_id=Delivery.where(deliveryman_city: Restaurant.find(@order.restaurant_id).restaurant_city).sample.id
             if @order.save!
                 render json: {
                     message: 'Details successfully submitted', data:@order
