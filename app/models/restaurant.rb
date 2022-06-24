@@ -2,7 +2,7 @@ class Restaurant < ApplicationRecord
     has_many :items
     has_one_attached :rest_image
     has_many :reviews, :as => :reviewable
-    # has_many :orders
+  
    
 
     validates :restaurant_name, presence: true
@@ -11,5 +11,5 @@ class Restaurant < ApplicationRecord
     validates :restaurant_description, presence: true
     validates :restaurant_city, presence: true 
     validates :restaurant_email, presence:true, uniqueness: true
-    # validates :user_id, uniqueness: true
+    validates :user_id, uniqueness: true
 end

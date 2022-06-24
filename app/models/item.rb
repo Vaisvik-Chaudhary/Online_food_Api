@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :cartitems
   has_many_attached :foodimages
   has_many :reviews, :as => :reviewable 
-  # belongs_to :order
+  
 
   validates :item_name, presence: true
   validates :item_price, presence: true, numericality: true

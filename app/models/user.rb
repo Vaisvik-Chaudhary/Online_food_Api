@@ -5,7 +5,7 @@ class User < ApplicationRecord
   after_create_commit :create_cart_detail
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
-  # has_one :deliveries
+ 
   
 
   validates :email, presence: true, uniqueness: true
@@ -31,9 +31,4 @@ class User < ApplicationRecord
       x=Cart.new(user_id: curent_user.id)
       p x.save(:validate => false)
     end
-
-
-  
-
-
 end
