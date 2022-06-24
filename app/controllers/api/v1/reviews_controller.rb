@@ -57,10 +57,7 @@ module Api
                 params.permit(:rating, :body , :user_id, :reviewable_type, :reviewable_id)
             end
             
-            # def set_item
-            #     @item= Item.find(params[:id])
-            # end
-        
+         
   
       end
     end

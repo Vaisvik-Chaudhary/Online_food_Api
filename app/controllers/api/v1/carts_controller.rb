@@ -4,6 +4,7 @@ module Api
 
         before_action :authenticate_user!
         
+        
         def index
             @cart= if params[:user_id]
                        Cart.find_by(user_id: params[:user_id])
@@ -19,7 +20,6 @@ module Api
             render json: @cart, status: :ok
         end
 
-        
         def create
         
             @cart = Cart.new(cart_params)
@@ -31,19 +31,19 @@ module Api
             end
         end
 
-    
+      
         def update
-           
-            @cart=Cart.find(params[:id])
-            
+            @cart = Cart.find(params[:id])
+
             if @cart.update(cart_obj: params[:cart_obj])
                 render json: {status: 'SUCCESS', message: 'item is updated', data:@cart}, status: :ok
             else
-                render json: {status: 'Error', message: 'item  is not updated', data:@cart.errors}, status: :unprocessable_entity
+            render json: {status: 'ERROR', message: 'item  is not updated', data:@cart.errors}, status: :unprocessable_entity
             end
-        end
+            render json: @cart ,status: :ok
+        end 
 
-        
+       
         def destroy
             @cart= Cart.find(params[:id])
             @cart.destroy

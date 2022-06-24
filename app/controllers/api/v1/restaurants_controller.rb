@@ -4,6 +4,8 @@ module Api
         
         before_action :authenticate_user!, :except => [:index]
 
+      
+      
         def index
 
             @restaurants=Restaurant.all
@@ -19,7 +21,6 @@ module Api
         
        
         def create
-            
             @restaurant = Restaurant.new(restaurant_params)
             
             if @restaurant.save!
@@ -32,13 +33,15 @@ module Api
         end
 
         def update
+
             @restaurant = Restaurant.find(params[:id])
 
             if @restaurant.update(restaurant_params)
             render json: {status: 'SUCCESS', message: 'restaurant is updated', data:@restaurant}, status: :ok
             else
-            render json: {status: 'Error', message: 'restaurant  is not updated', data:@restaurant.errors}, status: :unprocessable_entity
+            render json: {status: 'Error', message: 'restaurant is not updated', data:@restaurant.errors}, status: :unprocessable_entity
             end
+
         end
 
       
@@ -56,7 +59,6 @@ module Api
             def restaurant_params
                 params.require(:restaurant_register_data).permit(:restaurant_name, :restaurant_email, :restaurant_contact_number, :restaurant_address, :restaurant_city, :restaurant_description, :user_id, :secure_url)
             end
-
-      end
+        end
     end
   end

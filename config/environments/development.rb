@@ -8,6 +8,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  config.action_mailer.perform_deliveries = true
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -31,28 +33,58 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
+  # config.active_storage.service = :local
+
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_options = {from: 'purvrajdodia@gmail.com'}
+  # config.cache_classes = false
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     # :address              => "smtp.gmail.com",
+  #     # :port                 => 587,
+  #     # :user_name            => "purvrajdodia@gmail.com",
+  #     # :password             => "dmsvkgljmxhnxsam",
+  #     # :authentication       => 'plain',
+  #     # :enable_starttls_auto => true  }
+  #     address:              'smtp.gmail.com',
+  #     port:                 587,
+  #     domain:               'gmail.com',
+  #     user_name:            'purvrajdodia@gmail.com',
+  #     password:             'dmsvkgljmxhnxsam',
+  #     authentication:       :plain,
+  #     enable_starttls_auto: true
+  # }
+
+
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.raise_delivery_errors = true
+
   config.active_storage.service = :local
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.default_options = {from: 'purvrajdodia@gmail.com'}
+  # config.action_mailer.default_options = {from: 'collapro.pmt@gmail.com'}
   config.cache_classes = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_options = {cc:['vaisvik.chaudhary@bacancy.com','pranav.dodiya@bacancy.com']}
+
   config.action_mailer.smtp_settings = {
-      # :address              => "smtp.gmail.com",
-      # :port                 => 587,
-      # :user_name            => "purvrajdodia@gmail.com",
-      # :password             => "dmsvkgljmxhnxsam",
-      # :authentication       => 'plain',
-      # :enable_starttls_auto => true  }
+    
       address:              'smtp.gmail.com',
       port:                 587,
       domain:               'gmail.com',
-      user_name:            'purvrajdodia@gmail.com',
-      password:             'dmsvkgljmxhnxsam',
+      user_name:            'collapro.pmt@gmail.com',
+      # password:             'oblrfkgrpumekiab',
+      password:             'nvsvwetxwuomqhiy',
       authentication:       :plain,
       enable_starttls_auto: true
   }
+
+
+
+
+
 
 
   # Don't care if the mailer can't send.
@@ -90,4 +122,21 @@ Rails.application.configure do
   config.hosts << /[a-z0-9-]+\.in\.ngrok\.io/
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+
+
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default_url_options = { host:   ENV['MAIL_HOST']}
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   user_name:      ENV['SENDMAIL_USERNAME'],
+  #   password:       ENV['SENDMAIL_PASSWORD'],
+  #   domain:          ENV['MAIL_HOST'],
+  #   address:       'smtp.gmail.com',
+  #   port:          '587',
+  #   authentication: :plain,
+  #   enable_starttls_auto: true
+  # }
+
 end

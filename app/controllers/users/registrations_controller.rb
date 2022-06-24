@@ -13,24 +13,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
         end
 
         def register_success
-            UserMailer.with(user: @user).welcome_email.deliver_later
-                
+            # UserMailer.with(user: @user).welcome_email.deliver_later    
             render json: {
-                message: 'Signed up sucessfully.',
-                user: current_user
-                    
+                message: 'Signed up sucessfully.'
+                #user: current_user
             }, status: :ok
         end
 
-        def register_failed 
-            render json: { message: 'Something went wrong.'}, status: :unprocessable_entity
-        end
-
-        def register_failed 
-            render json: { message: 'Something went wrong.'}, status: :unprocessable_entity
-        end
-        
-        def user_params
-            params.permit(:email, :name, :contact_number, :password, :role)
-        end
+    def register_failed 
+        render json: { message: 'Something went wrong.'}, status: :unprocessable_entity
+    end
+    
+    def user_params
+        params.permit(:email, :name, :contact_number, :password, :role, :username)
+    end
 end

@@ -60,3 +60,4 @@ gem "httparty"
 gem 'active_model_serializers'
 gem 'rails_admin', '~> 3.0'
 gem "sassc-rails"
+gem "figaro"

@@ -1,25 +1,23 @@
 module Api
     module V1
       class OrdersController < ApplicationController
-        
-        before_action :authenticate_user!
-       
-       
+
+       before_action :authenticate_user!
         def index
-           
-            if params[:user_id]
-                @user=User.find(params[:user_id])
-                if @user.role== "Customer"
-                    @orders=Order.where(user_id: params[:user_id])
-                elsif @user.role== "Restaurant Owner"
-                    @e=Restaurant.find_by(user_id: params[:user_id])
-                    @orders=Order.where(restaurant_id: @e.id)
-                elsif @user.role== "Delivery Men"
-                    x= Delivery.select(:id).where(user_id: params[:user_id])
-                    @orders=Order.where(delivery_id: x)
-                end
-            end
-            render json: @orders , status: :ok
+         
+                    if params[:user_id]
+                        @user=User.find(params[:user_id])
+                        if @user.role =="Customer"
+                            @orders = Order.where(user_id: params[:user_id]) 
+                        elsif @user.role =="Restaurant Owner"
+                                @e = Restaurant.find_by(user_id: params[:user_id]) 
+                                @orders = Order.where(restaurant_id: @e.id)
+                        elsif @user.role =="Delivery Men"
+                            x = Delivery.select(:id).where(user_id: params[:user_id])
+                            @orders = Order.where(delivery_id: x)
+                        end
+                    end
+                    render json: @orders , status: :ok
         end
 
         def show
@@ -30,12 +28,12 @@ module Api
        
         def create
             @order = Order.new(order_params)
+
             @order.restaurant_id = Item.find(params[:order][:restaurant_id]).restaurant_id
-            @restaurant= Restaurant.find(@order.restaurant_id)
+            @restaurant = Restaurant.find(@order.restaurant_id)
             @order.restaurant_address=@restaurant.restaurant_address
-            @order.restaurant_id = Item.find(params[:order][:restaurant_id]).restaurant.id
+            @order.restaurant_id = Item.find(params[:order][:restaurant_id]).restaurant_id
             @order.delivery_id=Delivery.where(deliveryman_city: Restaurant.find(@order.restaurant_id).restaurant_city).sample.id
-            
             if @order.save!
                 render json: {
                     message: 'Details successfully submitted', data:@order

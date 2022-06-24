@@ -2,18 +2,18 @@ module Api
     module V1
       class CartitemsController < ApplicationController
 
-        
+      
         def index
             @cartitems=Cartitem.all
             render json: @cartitems , status: :ok
         end
 
-        
-        def showg
+       
+        def show
             render json: @cartitem, status: :ok
         end
 
-        
+       
         def create
             @cartitem = Cartitem.new(cartitem_params)
             if @cartitem.save!
@@ -24,7 +24,7 @@ module Api
             end
         end
 
-        
+     
         def update
             unless @cartitem.update(cartitem_params)
                 render json: { errors: @cartitem.errors.full_messages },
@@ -32,7 +32,7 @@ module Api
             end
         end
 
-        
+       
         def destroy
             @cartitem.destroy
         end
